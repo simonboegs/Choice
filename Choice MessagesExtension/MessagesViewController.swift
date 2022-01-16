@@ -9,6 +9,14 @@ import UIKit
 import Messages
 
 class MessagesViewController: MSMessagesAppViewController {
+    @IBAction func startButton(_ sender: Any) {
+        let layout = MSMessageTemplateLayout()
+        layout.caption = "whatup"
+        let message = MSMessage()
+        message.layout = layout
+        activeConversation?.insert(message, completionHandler: nil)
+    }
+    @IBOutlet weak var label: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +30,7 @@ class MessagesViewController: MSMessagesAppViewController {
         // This will happen when the extension is about to present UI.
         
         // Use this method to configure the extension and restore previously stored state.
+        print("will become active")
     }
     
     override func didResignActive(with conversation: MSConversation) {
@@ -39,6 +48,8 @@ class MessagesViewController: MSMessagesAppViewController {
         // extension on a remote device.
         
         // Use this method to trigger UI updates in response to the message.
+        label.text = "received"
+        print("received")
     }
     
     override func didStartSending(_ message: MSMessage, conversation: MSConversation) {
